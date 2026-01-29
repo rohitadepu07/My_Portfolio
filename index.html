@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Pulse Portfolio | Minecraft Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mc-bg: #1a1a1a;
+            --mc-border-light: #ffffff;
+            --mc-border-dark: #373737;
+            --mc-panel: #c6c6c6;
+            --mc-shadow: #000000;
+        }
+
+        body {
+            font-family: 'VT323', monospace;
+            background-color: #0d0d0d;
+            /* Immersive Deep Cave Background matching the provided image */
+            background-image: 
+                /* Layer 1: Dark Vignette for the cavernous feel */
+                radial-gradient(circle at 50% 40%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%),
+                /* Layer 2: High-Quality Minecraft Massive Cave Asset */
+                url('https://images8.alphacoders.com/121/1211756.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            image-rendering: auto;
+            
+            color: #ffffff;
+            scroll-behavior: smooth;
+            cursor: none;
+            overflow-x: hidden;
+            font-size: 18px;
+        }
+
+        @media (min-width: 768px) {
+            body { font-size: 20px; }
+        }
+
+        /* Minecraft Button Style */
+        .mc-button {
+            background: #7a7a7a;
+            border: 2px solid #000;
+            box-shadow: inset -4px -4px #333, inset 4px 4px #ccc;
+            padding: 8px 16px;
+            color: #e0e0e0;
+            text-shadow: 2px 2px #000;
+            transition: all 0.1s;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .mc-button:hover {
+            background: #8b8b8b;
+            border-color: #fff;
+            color: #fff;
+        }
+        .mc-button:active {
+            box-shadow: inset 4px 4px #333, inset -4px -4px #ccc;
+        }
+
+        /* Minecraft Panel Style */
+        .mc-panel {
+            background: #c6c6c6;
+            border: 4px solid #000;
+            box-shadow: inset -4px -4px #555, inset 4px 4px #fff;
+            color: #3f3f3f;
+            padding: 16px;
+        }
+        @media (min-width: 768px) {
+            .mc-panel { padding: 24px; }
+        }
+
+        .mc-dark-panel {
+            background: rgba(0, 0, 0, 0.158);
+            border: 2px solid #555;
+            color: #fff;
+            padding: 10px;
+            backdrop-filter: blur(6px);
+        }
+
+        /* Custom Cursor - Crosshair */
+        #custom-cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+        @media (hover: none) {
+            #custom-cursor-dot { display: none; }
+            body { cursor: auto; }
+        }
+
+        #custom-cursor-dot::before, #custom-cursor-dot::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            mix-blend-mode: difference;
+        }
+        #custom-cursor-dot::before {
+            top: 50%; left: 0; width: 100%; height: 2px; transform: translateY(-50%);
+        }
+        #custom-cursor-dot::after {
+            left: 50%; top: 0; height: 100%; width: 2px; transform: translateX(-50%);
+        }
+
+        /* HUD elements */
+        .hotbar {
+            position: fixed;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            background: rgba(0, 0, 0, 0.189);
+            border: 2px solid #111;
+            padding: 2px;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0,0,0,1);
+        }
+        
+        .hotbar-slot {
+            width: 38px;
+            height: 38px;
+            border: 2px solid #8b8b8b;
+            margin: 0 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.075);
+            position: relative;
+            transition: transform 0.1s;
+        }
+
+        @media (min-width: 768px) {
+            .hotbar { bottom: 24px; border-width: 4px; }
+            .hotbar-slot { width: 50px; height: 50px; border-width: 4px; margin: 0 2px; }
+        }
+
+        .hotbar-slot.active {
+            border-color: #fff;
+            background: rgba(255,255,255,0.15);
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        /* Minecraft font sizes */
+        h1 { font-size: 2.5rem; text-shadow: 3px 3px #3f3f3f; }
+        h2 { font-size: 2rem; text-shadow: 2px 2px #3f3f3f; }
+        h3 { font-size: 1.5rem; }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 4.5rem; text-shadow: 4px 4px #3f3f3f; }
+            h2 { font-size: 3rem; text-shadow: 3px 3px #3f3f3f; }
+            h3 { font-size: 2rem; }
+        }
+
+        .pixel-art {
+            image-rendering: pixelated;
+        }
+
+        /* Animation for item name popup */
+        @keyframes fadeOutUp {
+            0% { opacity: 1; transform: translate(-50%, -20px); }
+            80% { opacity: 1; transform: translate(-50%, -30px); }
+            100% { opacity: 0; transform: translate(-50%, -35px); }
+        }
+
+        .item-popup {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, -20px);
+            color: #fff;
+            text-shadow: 2px 2px #000;
+            white-space: nowrap;
+            pointer-events: none;
+            font-size: 1.25rem;
+            animation: fadeOutUp 2s forwards;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.087); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #55555527; border: 2px solid #333; }
+        
+        /* Cave Ambience - Ore "Sparkle" Overlays */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url('R:\My-Portfolio\components\Screenshot (92).png');
+            background-size: cover;
+            opacity: 0.7;
+        }
+
+        /* Deep Underground Fog */
+        .cave-fog {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50vh;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.897));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Top Shadows for the Cave Ceiling */
+        .ceiling-shadow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.721), transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="ceiling-shadow"></div>
+    <div class="cave-fog"></div>
+    <div id="custom-cursor-dot"></div>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

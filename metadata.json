@@ -1,0 +1,8 @@
+{
+  "name": "AI-Pulse Portfolio",
+  "description": "A cutting-edge developer portfolio featuring a live Gemini-powered assistant, interactive project analytics, and sleek modern UI transitions.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
