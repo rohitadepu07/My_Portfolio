@@ -10,15 +10,15 @@ interface HUDProps {
 const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
   
   const PlayerIcon = () => (
-      <img src="components/Icon/emote.jpeg" alt="components/Icon/emote.jpeg" />
+      <img src="My_Portifolio/components/Icon/emote.jpeg" alt="components/Icon/emote.jpeg" />
   );
 
   const ChatIcon = () => (
-      <img src="components/Icon/chat.jpeg" alt="components/Icon/chat.jpeg" />
+      <img src="My_Portifolio/components/Icon/chat.jpeg" alt="components/Icon/chat.jpeg" />
   );
 
   const MenuIcon = () => (
-      <img src="components/Icon/Pause.jpeg" alt="components/Icon/Pause.jpeg" />
+      <img src="My_Portifolio/components/Icon/Pause.jpeg" alt="components/Icon/Pause.jpeg" />
   );
 
   const Heart: React.FC<{ full?: boolean; half?: boolean; empty?: boolean }> = ({ full = true, half = false, empty = false }) => (
