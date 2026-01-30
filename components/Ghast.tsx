@@ -3,13 +3,13 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const Ghast: React.FC = () => {
   // Official Minecraft high-quality assets
-  const GHAST_NORMAL = "https://minecraft.wiki/images/thumb/Happy_Ghast_JE1_BE1.gif/240px-Happy_Ghast_JE1_BE1.gif?7e801";
+  const GHAST_NORMAL = "components/Happy_Ghast.gif";
   
   /**
    * The shooting expression image as provided by the user.
    * Using the high-quality Minecraft Wiki asset that matches the uploaded image.
    */
-  const GHAST_ATTACK = "https://minecraft.wiki/images/thumb/Ghast_shooting_JE3.png/150px-Ghast_shooting_JE3.png?48502";
+  const GHAST_ATTACK = "components/Ghast_shooting.png";
 
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const [targetPos, setTargetPos] = useState({ x: 50, y: 50 });
