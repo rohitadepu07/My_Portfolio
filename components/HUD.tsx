@@ -1,6 +1,10 @@
 
 import React from 'react';
 
+import emoteImg from './Icon/emote.jpeg';
+import chatImg from './Icon/chat.jpeg';
+import pauseImg from './Icon/Pause.jpeg';
+
 interface HUDProps {
   onToggleChat: () => void;
   onTogglePause: () => void;
@@ -9,18 +13,20 @@ interface HUDProps {
 
 const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
   
+  // Now use the imported variables as the 'src'
   const PlayerIcon = () => (
-      <img src="/Icon/emote.jpeg" alt="Emote Icon" />
+      <img src={emoteImg} alt="Emote Icon" className="w-6 h-6 object-contain" />
   );
 
   const ChatIcon = () => (
-      <img src="/Icon/chat.jpeg" alt="Chat Icon" />
+      <img src={chatImg} alt="Chat Icon" className="w-6 h-6 object-contain" />
   );
 
   const MenuIcon = () => (
-      <img src="/Icon/Pause.jpeg" alt="Pause Icon" />
+      <img src={pauseImg} alt="Pause Icon" className="w-6 h-6 object-contain" />
   );
 
+  // ... (Rest of your component remains the same)
   const Heart: React.FC<{ full?: boolean; half?: boolean; empty?: boolean }> = ({ full = true, half = false, empty = false }) => (
     <svg width="18" height="18" viewBox="0 0 9 9" className="pixel-art drop-shadow-[1px_1px_rgba(0,0,0,0.8)]">
       <path d="M2 0h2v1h1v-1h2v1h1v1h1v3h-1v1h-1v1h-1v1h-1v-1h-1v-1h-1v-1h-1v-3h1v-1z" fill="#000" />
