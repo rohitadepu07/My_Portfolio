@@ -15,15 +15,15 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
   
   // Now use the imported variables as the 'src'
   const PlayerIcon = () => (
-      <img src={emoteImg} alt="Emote Icon" className="w-6 h-6 object-contain" />
+      <img src={emoteImg} alt="Emote Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
   );
 
   const ChatIcon = () => (
-      <img src={chatImg} alt="Chat Icon" className="w-6 h-6 object-contain" />
+      <img src={chatImg} alt="Chat Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
   );
 
   const MenuIcon = () => (
-      <img src={pauseImg} alt="Pause Icon" className="w-6 h-6 object-contain" />
+      <img src={pauseImg} alt="Pause Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
   );
 
   // ... (Rest of your component remains the same)
