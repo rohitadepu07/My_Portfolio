@@ -24,7 +24,7 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
 
   const MenuIcon = () => (
       <img src={pauseImg} alt="Pause Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
-  );
+  );  
 
   // ... (Rest of your component remains the same)
   const Heart: React.FC<{ full?: boolean; half?: boolean; empty?: boolean }> = ({ full = true, half = false, empty = false }) => (
