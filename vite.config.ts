@@ -19,6 +19,6 @@ export default defineConfig(({ mode }) => {
           '@': path.resolve(__dirname, '.'),
         }
       },
-      base: '/your-repo-name/', // Must match your GitHub repo name exactly
+      base: '/My_Portfolio/', // Must match your GitHub repo name exactly
     };
 });
