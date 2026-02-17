@@ -10,6 +10,9 @@ const getSystemInstruction = () => {
     Name: ${PORTFOLIO_DATA.name}
     Role: ${PORTFOLIO_DATA.role}
     Bio: ${PORTFOLIO_DATA.fullBio}
+
+    Hobbies (Things Rohit enjoys outside of main work):
+    ${PORTFOLIO_DATA.hobbies.map(h => `- ${h}`).join('\n')}
     
     Projects:
     ${PORTFOLIO_DATA.projects.map(p => `- ${p.title}: ${p.description} (Tech: ${p.tags.join(', ')})`).join('\n')}

@@ -43,6 +43,7 @@ export interface PortfolioData {
   fullBio: string;
   location: string;
   email: string;
+  hobbies: string[];
   projects: Project[];
   skills: Skill[];
   experience: Experience[];
