@@ -6,8 +6,8 @@ export const PORTFOLIO_DATA: PortfolioData = {
   role: "Full Stack Web Developer",
   location: "Mumbai, Maharashtra",
   email: "rohitadepu27@gmail.com",
-  bio: "Just A Creator.... \nWith a creative mind, \nJust keep learn, exploring, building, repeat",
-  fullBio: "Just A Creator.... \nWith a creative mind, \nJust keep learn, exploring, building, repeat",
+  bio: "Just A Creator.... \nWith a creative mind, \nJust keep learning, exploring, building, repeat...",
+  fullBio: "Just A Creator.... \nWith a creative mind, \nJust keep learning, exploring, building, repeat...",
   hobbies: ["Artist: Drawing,sketching, painting and digital art; Music Production: Linux - LMMS Studio; Animation:  Pencil2D, krita; Watching Movies:Sci-fi, adventure, mystery; Watching and reading Documentries: Business case studies; Clean Code:  Main ability" ],
   projects: [
     {
