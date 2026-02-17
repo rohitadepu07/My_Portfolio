@@ -64,7 +64,7 @@ const App: React.FC = () => {
             Server Disconnected
           </div>
           <h1 className="text-white text-4xl md:text-4xl mb-8 drop-shadow-[4px_4px_#000] font-bold">
-            Reload Web... To Go Spawn Point Againn...
+            Reload Web... To Spawn Againn...
           </h1>
         </div>
       </div>
