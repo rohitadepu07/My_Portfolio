@@ -21,7 +21,7 @@ jobs:
           npm install
           npm run build
         env:
-          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }} # This grabs your hidden secret
+          VITE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # This grabs your hidden secret
 
       - name: Upload Artifact 📦
         uses: actions/upload-pages-artifact@v3
