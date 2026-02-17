@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main] # Runs every time you push to main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Install and Build 🔧
+        run: |
+          npm install
+          npm run build
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # This grabs your hidden secret
+
+      - name: Upload Artifact 📦
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4

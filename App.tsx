@@ -58,12 +58,9 @@ const App: React.FC = () => {
           <div className="text-red-600 text-2xl md:text-3xl mb-12 font-bold uppercase tracking-wider drop-shadow-[2px_2px_#000]">
             Server Disconnected
           </div>
-          <button 
-            onClick={handleReconnect}
-            className="mc-button py-4 px-12 text-2xl w-full max-sm"
-          >
-            Back to Title Screen
-          </button>
+          <h1 className="text-white text-4xl md:text-4xl mb-8 drop-shadow-[4px_4px_#000] font-bold">
+            Reload Web... To Go Spawn Point Againn...
+          </h1>
         </div>
       </div>
     );
@@ -128,6 +125,17 @@ const App: React.FC = () => {
                 <div className="p-4 bg-black/40 border-4 border-slate-700 backdrop-blur-md">
                    <SkillsRadar />
                 </div>
+                                <div className="mc-dark-panel border-2 border-yellow-600 p-4">
+                   <h3 className="text-yellow-400 mb-2">Player Hobbies: T shapped learner</h3>
+                   <ul className="text-slate-300 text-lg space-y-1">
+                     <li>- <span className="text-white">Artist:</span> drawing, sketching, painting,</li>
+                     <li>- <span className="text-white">Music Production:</span> Linux - LMMS Studio</li>
+                     <li>- <span className="text-white">Animation:</span> Pencil2D, krita</li>
+                     <li>- <span className="text-white">Watching Movies:</span> Sci-fi, adventure, mystery</li>
+                     <li>- <span className="text-white">Watching and reading Documentries: Business case studies</span> </li>
+                     <li>- <span className="text-white">Clean Code:</span> Main ability</li>
+                   </ul>
+                </div>
               </div>
             </div>
           </section>
@@ -162,7 +170,7 @@ const App: React.FC = () => {
                   <div className="bg-black/10 p-3 border-2 border-black/20 text-left">
                     <h4 className="font-bold mb-1 text-sm md:text-base">DIRECT CONNECTION</h4>
                     <p className="text-lg md:text-xl break-all">{PORTFOLIO_DATA.email}</p>
-                    <p className="text-base opacity-60">+91-9137794033</p>
+                    <p className="text-base opacity-60">LinkedIn - Rohit Adepu</p>
                   </div>
                   <div className="bg-black/10 p-3 border-2 border-black/20 text-left">
                     <h4 className="font-bold mb-1 text-sm md:text-base">COORDINATES</h4>

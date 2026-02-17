@@ -6,8 +6,8 @@ export const PORTFOLIO_DATA: PortfolioData = {
   role: "Full Stack Web Developer",
   location: "Mumbai, Maharashtra",
   email: "rohitadepu27@gmail.com",
-  bio: "I have a deep-seated passion for continuous learning and creation. I thrive on the process of acquiring new skills, then synthesizing them in unexpected ways to develop something truly unique.",
-  fullBio: "I have a deep-seated passion for continuous learning and creation. I thrive on the process of acquiring new skills, then synthesizing them in unexpected ways to develop something truly unique. My greatest satisfaction comes from taking a fresh approach to a challenge, using a diverse set of abilities to bring a novel concept to life.",
+  bio: "Just A Creator.... \nWith a creative mind, \nwho likes to learn new things and create(Build) something new with the skills I have.",
+  fullBio: "Just A Creator.... \nWith a creative mind, \nwho likes to learn new things and create(Build) something new with the skills I have.",
   projects: [
     {
       id: "factcheck",
@@ -45,9 +45,9 @@ export const PORTFOLIO_DATA: PortfolioData = {
   ],
   skills: [
     { name: "Html/Css/JS", level: 90, category: "Frontend" },
-    { name: "Bootstrap", level: 80, category: "Frontend" },
+    { name: "Bootstrap", level: 50, category: "Frontend" },
     { name: "C/C++", level: 70, category: "System Design" },
-    { name: "Python", level: 50, category: "AI/ML" },
+    { name: "Python (FastAPI)", level: 50, category: "Backend" },
     { name: "Flutter", level: 40, category: "Mobile Development"},
     { name: "React", level: 20, category: "Frontend" },
     { name: "Node.js", level: 25, category: "Backend" },
