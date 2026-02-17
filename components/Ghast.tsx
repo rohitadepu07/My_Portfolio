@@ -9,7 +9,7 @@ const Ghast: React.FC = () => {
    * The shooting expression image as provided by the user.
    * Using the high-quality Minecraft Wiki asset that matches the uploaded image.
    */
-  const GHAST_ATTACK = "/images/components/Ghast_shooting.png";
+  const GHAST_ATTACK = '/images/components/Ghast_shooting.png';
 
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const [targetPos, setTargetPos] = useState({ x: 50, y: 50 });
