@@ -19,6 +19,11 @@ const App: React.FC = () => {
   const [isDisconnected, setIsDisconnected] = useState(false);
   const [isEmoting, setIsEmoting] = useState(false);
 
+  // Reset scroll position when view changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
+
   const toggleChat = () => setIsChatOpen(!isChatOpen);
   const togglePause = () => setIsPaused(!isPaused);
 
@@ -251,9 +256,12 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <footer className="py-12 bg-black/90 text-center text-slate-500 text-xl border-t-4 border-slate-800 z-10 relative">
-        <div className="mb-4 text-cyan-400">
-          Portfolio crafted by Rohit Adepu - A Creator in the Minecraft World. Built with React, Tailwind CSS, and a touch of Redstone magic.
+      <footer className="min-h-screen flex flex-col items-center justify-center bg-black/90 text-center text-slate-500 text-xl border-t-4 border-slate-800 z-10 relative px-4">
+         <div className="mb-4 text-cyan-400 max-w-2xl">
+             Portfolio crafted by Rohit Adepu - A Creator in the World.
+        </div>
+        <div className="mb-4 text-cyan-600 max-w-4xl">
+             Built with React, Tailwind CSS, and a touch of Redstone magic.
         </div>
         <div>&copy; {new Date().getFullYear()} {PORTFOLIO_DATA.name} World. No Creepers were harmed.</div>
       </footer>
