@@ -253,7 +253,7 @@ const App: React.FC = () => {
 
       <footer className="py-12 bg-black/90 text-center text-slate-500 text-xl border-t-4 border-slate-800 z-10 relative">
         <div className="mb-4 text-cyan-400">
-          Portfolio v1.22 - Powered by Redstone & Gemini AI
+          Portfolio crafted by Rohit Adepu - A Creator in the Minecraft World. Built with React, Tailwind CSS, and a touch of Redstone magic.
         </div>
         <div>&copy; {new Date().getFullYear()} {PORTFOLIO_DATA.name} World. No Creepers were harmed.</div>
       </footer>
