@@ -27,7 +27,7 @@ const ExperienceTimeline: React.FC = () => {
           
           <div className="group flex gap-4 text-slate-300 text-xl bg-white/5 p-4 border border-white/10 hover:border-yellow-400/50 transition-colors">
             <span className="text-yellow-400 font-bold group-hover:scale-125 transition-transform">&raquo;</span>
-            <p className="leading-tight">Academic advancement in the field of Computer Science and Science.</p>
+            <p className="leading-tight">-</p>
           </div>
         </div>
       ))}
