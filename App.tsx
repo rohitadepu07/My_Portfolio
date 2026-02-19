@@ -149,7 +149,7 @@ const App: React.FC = () => {
         return (
           <section className="py-12 max-w-4xl mx-auto animate-in slide-in-from-right-8 duration-300">
             <div className="mc-panel text-center mb-16 border-double border-8 border-slate-500 shadow-2xl">
-              <h2 className="text-black">World History (Quest Log)</h2>
+              <h2 className="text-black">Player World History (Quest Log)</h2>
               <p className="text-slate-600">Player Journey and Education</p>
             </div>
             <div className="mc-dark-panel border-4 border-slate-600 bg-black/80">
