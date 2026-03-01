@@ -112,7 +112,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
       title: "4th Hackathon at PDEA's College of Engineering, Pune",
       issuer: "PDEA's College of Engineering, Pune",
       date: "20-06-2026",
-      image: "./certificates/PDEA.jpeg"
+      image: "./certificates/Pune.jpeg"
     },
   ]
 };

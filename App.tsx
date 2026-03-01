@@ -182,7 +182,7 @@ const App: React.FC = () => {
                   </div>
                   <div className="bg-black/10 p-3 border-2 border-black/20 text-left">
                     <h4 className="font-bold mb-1 text-sm md:text-base">COORDINATES</h4>
-                    <p className="text-lg md:text-xl">Mumbai, India (Layer 64)</p>
+                    <p className="text-lg md:text-xl">Mumbai,Maharashtra, India</p>
                     <p className="text-xs uppercase opacity-50">GitHub: @rohitadepu07</p>
                   </div>
                 </div>
