@@ -91,28 +91,28 @@ export const PORTFOLIO_DATA: PortfolioData = {
       title: "1st Hackathon at Mumabi Hacks",
       issuer: "Mumabi Hacks",
       date: "28-11-2025",
-      image: "public/certificates/Mumabi Hacks.jpeg"
+      image: "./certificates/Mumabi Hacks.jpeg"
     },
     {
       id: "cert-2",
       title: "2nd Hackathon at NMIMS",
       issuer: "NMIMS - GDG DevFest Mumbai",
       date: "15-02-2026",
-      image: "public/certificates/GDG.jpeg"
+      image: "./certificates/GDG.jpeg"
     },
     {
       id: "cert-3",
       title: "3rd Finals Hackathon at Ashoka University",
       issuer: "Ashoka University",
       date: "10-04-2026",
-      image: "public/certificates/Ashoka.jpeg"
+      image: "./certificates/Ashoka.jpeg"
     },
     {
       id: "cert-4",
       title: "4th Hackathon at PDEA's College of Engineering, Pune",
       issuer: "PDEA's College of Engineering, Pune",
       date: "20-06-2026",
-      image: "public/certificates/PDEA.jpeg"
+      image: "./certificates/PDEA.jpeg"
     },
   ]
 };
