@@ -1,12 +1,22 @@
 
 import React, { useState, useEffect } from 'react';
 
-export type ViewType = 'spawn' | 'solo' | 'team' | 'stats' | 'questlog' | 'contact';
+export type ViewType = 'spawn' | 'solo' | 'team' | 'stats' | 'questlog' | 'certificates' |'contact';
 
 /**
  * Custom Pixel Art Icons for the Hotbar
  * Designed on a 16x16 grid for authentic cartoon pixel aesthetic
  */
+const PixelCert = () => (
+  <svg width="24" height="24" viewBox="0 0 16 16" className="pixel-art drop-shadow-[2px_2px_rgba(0,0,0,0.5)]">
+    <rect x="2" y="2" width="12" height="12" fill="#8b4513" /> {/* Frame Border */}
+    <rect x="3" y="3" width="10" height="10" fill="#f5deb3" /> {/* Parchment */}
+    <rect x="5" y="5" width="6" height="1" fill="#555" opacity="0.5" /> {/* Text Line 1 */}
+    <rect x="5" y="7" width="6" height="1" fill="#555" opacity="0.5" /> {/* Text Line 2 */}
+    <rect x="6" y="9" width="4" height="4" fill="#ffd700" /> {/* Gold Seal */}
+    <rect x="7" y="10" width="2" height="2" fill="#b8860b" /> {/* Seal Detail */}
+  </svg>
+);
 
 const PixelSpawn = () => (
   <svg width="24" height="24" viewBox="0 0 16 16" className="pixel-art drop-shadow-[2px_2px_rgba(0,0,0,0.5)]">
@@ -89,6 +99,7 @@ const Navbar: React.FC<Props> = ({ currentView, setView }) => {
     { icon: <PixelTeam />, name: 'Team Projects', view: 'team' },
     { icon: <PixelStats />, name: 'Player Stats', view: 'stats' },
     { icon: <PixelQuest />, name: 'Quest Log', view: 'questlog' },
+    { icon: <PixelCert />, name: 'Achievements', view: 'certificates' },
     { icon: <PixelContact />, name: 'Contact Info', view: 'contact' }
   ];
 

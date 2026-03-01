@@ -36,6 +36,15 @@ export interface Education {
   period: string;
 }
 
+export interface Certificate {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  url?: string;
+  image?: string;
+}
+
 export interface PortfolioData {
   name: string;
   role: string;
@@ -48,6 +57,7 @@ export interface PortfolioData {
   skills: Skill[];
   experience: Experience[];
   education: Education[];
+  certificates: Certificate[];
 }
 
 export interface ChatMessage {

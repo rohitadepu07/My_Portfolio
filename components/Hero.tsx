@@ -30,6 +30,9 @@ const Hero: React.FC<HeroProps> = ({ onSetView }) => {
           <p className="text-lg md:text-2x2 text-green-400 mb-2 md:mb-2 font-bold tracking-widest uppercase">
             <span className="hidden md:inline">Full-Stack Engineer</span>
           </p>
+          <p className="text-lg md:text-2x2 text-green-400 mb-2 md:mb-2 font-bold tracking-widest uppercase">
+            <span className="hidden md:inline">(1st Year Computer Science And Design Student)</span>
+          </p>
           <p className="text-lg md:text-2x2 leading-relaxed text-slate-50 font-medium line-clamp-4 md:line-clamp-none whitespace-pre-line">
             {PORTFOLIO_DATA.bio}
           </p>

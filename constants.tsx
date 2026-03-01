@@ -3,11 +3,11 @@ import { PortfolioData } from './types';
 
 export const PORTFOLIO_DATA: PortfolioData = {
   name: "Rohit Adepu",
-  role: "Full Stack Web Developer",
+  role: "Full Stack Web Developer (1st Year Computer Science And Design Student)",
   location: "Mumbai, Maharashtra",
   email: "rohitadepu27@gmail.com",
-  bio: "Just a Creator.... \nwith a Creative Mind, \njust keep Exploring, Learning, Building, Repeat...",
-  fullBio: "Just aCreator.... \nwith a Creative Mind, \njust keep Exploring, Learning, Building, Repeat...",
+  bio: "Just a Creator.... with a Creative Mind, \njust keep Exploring, Learning, Building, Repeat...",
+  fullBio: "Just aCreator.... with a Creative Mind, \njust keep Exploring, Learning, Building, Repeat...",
   hobbies: ["Artist: Drawing,sketching, painting and digital art; Music Production: Linux - LMMS Studio; Animation:  Pencil2D, krita; Watching Movies:Sci-fi, adventure, mystery; Watching and reading Documentries: Business case studies; Clean Code:  Main ability" ],
   projects: [
     {
@@ -20,6 +20,17 @@ export const PORTFOLIO_DATA: PortfolioData = {
       isTeam: false,
       stats: { stars: 45, forks: 12, commits: 88 },
       githubUrl: "https://factcheck-ai.netlify.app/"
+    },
+    {
+      id: "Threaded-Design-Memories",
+      title: "Threaded Design Memories",
+      description: "Embroidery Startup which focuses on different types of design that will be memories for the customers.",
+      longDescription: "Threaded Design Memories is a platform for a startup business that focuses on creative embroidery designs.",
+      image: "./Projects SS/Threaded-Design-Memories.png",
+      tags: [],
+      isTeam: false,
+      stats: { stars: 45, forks: 12, commits: 88 },
+      githubUrl: "https://threaded-design-memories.netlify.app/"
     },
     {
       id: "factline",
@@ -73,5 +84,35 @@ export const PORTFOLIO_DATA: PortfolioData = {
       degree: "SSC - Science",
       period: "Completed"
     }
+  ],
+  certificates: [
+    {
+      id: "cert-1",
+      title: "1st Hackathon at Mumabi Hacks",
+      issuer: "Mumabi Hacks",
+      date: "28-11-2025",
+      image: "public/certificates/Mumabi Hacks.jpeg"
+    },
+    {
+      id: "cert-2",
+      title: "2nd Hackathon at NMIMS",
+      issuer: "NMIMS - GDG DevFest Mumbai",
+      date: "15-02-2026",
+      image: "public/certificates/GDG.jpeg"
+    },
+    {
+      id: "cert-3",
+      title: "3rd Finals Hackathon at Ashoka University",
+      issuer: "Ashoka University",
+      date: "10-04-2026",
+      image: "public/certificates/Ashoka.jpeg"
+    },
+    {
+      id: "cert-4",
+      title: "4th Hackathon at PDEA's College of Engineering, Pune",
+      issuer: "PDEA's College of Engineering, Pune",
+      date: "20-06-2026",
+      image: "public/certificates/PDEA.jpeg"
+    },
   ]
 };

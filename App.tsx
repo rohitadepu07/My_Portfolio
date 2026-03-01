@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import ProjectCard from './components/ProjectCard';
 import SkillsRadar from './components/SkillsRadar';
 import ExperienceTimeline from './components/ExperienceTimeline';
+import Certificates from './components/Certificates';
 import ChatAssistant from './components/ChatAssistant';
 import CustomCursor from './components/CustomCursor';
 import HUD from './components/HUD';
@@ -157,6 +158,8 @@ const App: React.FC = () => {
             </div>
           </section>
         );
+      case 'certificates':
+        return <Certificates />;
       case 'contact':
         return (
           <section className="min-h-[90vh] flex items-center justify-center py-12 animate-in zoom-in duration-300">
@@ -258,7 +261,7 @@ const App: React.FC = () => {
 
       <footer className="min-h-screen flex flex-col items-center justify-center bg-black/90 text-center text-slate-500 text-xl border-t-4 border-slate-800 z-10 relative px-4">
          <div className="mb-4 text-cyan-400 max-w-2xl">
-             Portfolio crafted by Rohit Adepu - A Creator in the World.
+             Portfolio crafted by Rohit Adepu - Creator of this World.
         </div>
         <div className="mb-4 text-cyan-600 max-w-4xl">
              Built with React, Tailwind CSS, and a touch of Redstone magic.
