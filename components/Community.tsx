@@ -31,6 +31,7 @@ const Community: React.FC = () => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [showLoginWarning, setShowLoginWarning] = useState(false);
     const [showProfanityWarning, setShowProfanityWarning] = useState(false);
+    const [isCreativeMode, setIsCreativeMode] = useState(false);
 
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -155,6 +156,20 @@ const Community: React.FC = () => {
                     return;
                 }
 
+                if (commentText.toLowerCase() === '/gamemode creative' || commentText.toLowerCase() === '/gamemode 1') {
+                    setIsCreativeMode(true);
+                    setNewComment('');
+                    setComments(prev => [...prev, { id: 'sys_' + Date.now(), username: 'System', text: 'Set own game mode to Creative Mode', timestamp: Date.now() }]);
+                    return;
+                }
+
+                if (commentText.toLowerCase() === '/gamemode survival' || commentText.toLowerCase() === '/gamemode 0') {
+                    setIsCreativeMode(false);
+                    setNewComment('');
+                    setComments(prev => [...prev, { id: 'sys_' + Date.now(), username: 'System', text: 'Set own game mode to Survival Mode', timestamp: Date.now() }]);
+                    return;
+                }
+
                 const commentPayload = {
                     username: user.username,
                     text: commentText,
@@ -170,7 +185,16 @@ const Community: React.FC = () => {
     };
 
     return (
-        <section className="pt-14 pb-4 md:pt-[72px] px-4 mx-auto animate-in fade-in zoom-in duration-300 relative font-['VT323',_monospace] flex flex-col items-center gap-6 z-10 w-full max-w-7xl">
+        <section className={`pt-14 pb-4 md:pt-[72px] px-4 mx-auto animate-in fade-in zoom-in duration-300 relative font-['VT323',_monospace] flex flex-col items-center gap-6 z-10 w-full max-w-7xl transition-all duration-1000 ${isCreativeMode ? 'drop-shadow-[0_0_50px_rgba(85,255,255,0.4)] scale-[1.02]' : ''}`}>
+            {isCreativeMode && (
+                <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+                    <div className="absolute inset-0 bg-[#55ffff]/5 animate-pulse mix-blend-screen"></div>
+                    <div className="absolute top-[10%] left-[5%] text-[#55ffff]/30 text-6xl animate-bounce">⊹</div>
+                    <div className="absolute top-[30%] right-[10%] text-[#55ffff]/30 text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>⊹</div>
+                    <div className="absolute bottom-[20%] left-[15%] text-[#55ffff]/30 text-5xl animate-bounce" style={{ animationDelay: '1s' }}>⊹</div>
+                    <div className="absolute bottom-[10%] right-[20%] text-[#55ffff]/30 text-6xl animate-bounce" style={{ animationDelay: '1.5s' }}>⊹</div>
+                </div>
+            )}
 
             {/* Profile Button - Top Right */}
             <div className="absolute top-2 right-4 md:right-8 z-50">
@@ -187,8 +211,8 @@ const Community: React.FC = () => {
             </div>
 
             {/* Top Like Panel */}
-            <div className="border border-[#3a3a3a] bg-[#1a1a1a]/95 mx-auto flex flex-col items-center py-2 mb-2 w-[90%] sm:w-[95%] md:w-auto px-4 md:px-8 shadow-[0_0_15px_rgba(0,0,0,0.8)]">
-                <h3 className="text-slate-300 text-lg md:text-xl tracking-wide mb-3 drop-shadow-[2px_2px_#000] text-center">
+            <div className={`border mx-auto flex flex-col items-center py-2 mb-2 w-[90%] sm:w-[95%] md:w-auto px-4 md:px-8 shadow-[0_0_15px_rgba(0,0,0,0.8)] transition-all duration-1000 ${isCreativeMode ? 'bg-[#0a1a2a]/95 border-[#55ffff]' : 'bg-[#1a1a1a]/95 border-[#3a3a3a]'}`}>
+                <h3 className={`text-lg md:text-xl tracking-wide mb-3 drop-shadow-[2px_2px_#000] text-center transition-colors duration-1000 ${isCreativeMode ? 'text-[#55ffff]' : 'text-slate-300'}`}>
                     Enjoyed My Creative Portfolio? Leave a like to support me!
                 </h3>
 
@@ -241,7 +265,7 @@ const Community: React.FC = () => {
             </div>
 
             {/* Bottom Terminal / Chat Panel */}
-            <div className="w-[95%] sm:w-[700px] mx-auto border border-[#3a3a3a] bg-[#0c0c0c]/95 p-3 sm:p-4 text-xs sm:text-sm shadow-[0_0_15px_rgba(0,0,0,0.8)] relative flex flex-col justify-between h-[220px] sm:h-[260px]">
+            <div className={`w-[95%] sm:w-[700px] mx-auto border p-3 sm:p-4 text-xs sm:text-sm shadow-[0_0_15px_rgba(0,0,0,0.8)] relative flex flex-col justify-between h-[220px] sm:h-[260px] transition-all duration-1000 ${isCreativeMode ? 'bg-[#05101a]/95 border-[#55ffff]' : 'bg-[#0c0c0c]/95 border-[#3a3a3a]'}`}>
 
                 {/* Chat History */}
                 <div
