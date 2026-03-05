@@ -22,17 +22,7 @@ const App: React.FC = () => {
   const [isDisconnected, setIsDisconnected] = useState(false);
   const [isEmoting, setIsEmoting] = useState(false);
 
-  // Global visitor counter logic
-  useEffect(() => {
-    const recordVisit = async () => {
-      // Use sessionStorage so we only count once per browser session
-      if (!sessionStorage.getItem('mc_portfolio_visited')) {
-        await supabase.rpc('increment_visitors');
-        sessionStorage.setItem('mc_portfolio_visited', 'true');
-      }
-    };
-    recordVisit();
-  }, []);
+
 
   // Reset scroll position when view changes
   useEffect(() => {

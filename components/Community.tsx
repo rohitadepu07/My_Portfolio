@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../services/supabase';
 import ProfileModal from './ProfileModal';
 import { Filter } from 'bad-words';
+import RollingNumber from './RollingNumber';
 
 const filter = new Filter();
 
@@ -66,6 +67,14 @@ const Community: React.FC = () => {
             if (statsData) {
                 setLikes(statsData.likes);
                 setVisitors(statsData.visitors);
+
+                if (!sessionStorage.getItem('mc_portfolio_visited')) {
+                    sessionStorage.setItem('mc_portfolio_visited', 'true');
+                    // Delay increment so the user visibly sees the counter go up
+                    setTimeout(async () => {
+                        await supabase.rpc('increment_visitors');
+                    }, 1000);
+                }
             }
 
             // Fetch initial comments
@@ -180,7 +189,7 @@ const Community: React.FC = () => {
             {/* Top Like Panel */}
             <div className="border border-[#3a3a3a] bg-[#1a1a1a]/95 mx-auto flex flex-col items-center py-2 mb-2 w-[90%] sm:w-[95%] md:w-auto px-4 md:px-8 shadow-[0_0_15px_rgba(0,0,0,0.8)]">
                 <h3 className="text-slate-300 text-lg md:text-xl tracking-wide mb-3 drop-shadow-[2px_2px_#000] text-center">
-                    Enjoying your stay? Leave a like to support the server!
+                    Enjoyed My Creative Portfolio? Leave a like to support me!
                 </h3>
 
                 <div className="flex flex-row flex-wrap justify-center items-center gap-4 md:gap-6">
@@ -203,7 +212,7 @@ const Community: React.FC = () => {
                         </svg>
                         <span className="text-[#a8a8a8] font-bold text-xl md:text-2xl tracking-wider drop-shadow-[2px_2px_#000] opacity-80">Views</span>
                         <span className="bg-[#1f1f1f] px-3 py-1 text-[#55ffff] text-lg md:text-xl drop-shadow-[1px_1px_#000] border-2 border-[#111] rounded-sm shadow-[inset_2px_2px_#000]">
-                            {visitors}
+                            <RollingNumber value={visitors} />
                         </span>
                     </div>
 
