@@ -1,5 +1,5 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+<img width="1200" height="475" alt="GHBanner" src="image.png" />
 </div>
 
 <h1 align="center">⚔️ Rohit Adepu's Interactive Portfolio ⛏️</h1>
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.buymeacoffee.com/rohitadepu" target="_blank">
+  <a href="buymeacoffee.com/rohit_adepu" target="_blank">
     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" >
   </a>
 </p>
