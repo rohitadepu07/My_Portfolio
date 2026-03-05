@@ -6,12 +6,14 @@ import ProjectCard from './components/ProjectCard';
 import SkillsRadar from './components/SkillsRadar';
 import ExperienceTimeline from './components/ExperienceTimeline';
 import Certificates from './components/Certificates';
+import Community from './components/Community';
 import ChatAssistant from './components/ChatAssistant';
 import CustomCursor from './components/CustomCursor';
 import HUD from './components/HUD';
 import PlayerEmote from './components/PlayerEmote';
 import Ghast from './components/Ghast';
 import { PORTFOLIO_DATA } from './constants';
+import { supabase } from './services/supabase';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>('spawn');
@@ -19,6 +21,18 @@ const App: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isDisconnected, setIsDisconnected] = useState(false);
   const [isEmoting, setIsEmoting] = useState(false);
+
+  // Global visitor counter logic
+  useEffect(() => {
+    const recordVisit = async () => {
+      // Use sessionStorage so we only count once per browser session
+      if (!sessionStorage.getItem('mc_portfolio_visited')) {
+        await supabase.rpc('increment_visitors');
+        sessionStorage.setItem('mc_portfolio_visited', 'true');
+      }
+    };
+    recordVisit();
+  }, []);
 
   // Reset scroll position when view changes
   useEffect(() => {
@@ -44,7 +58,7 @@ const App: React.FC = () => {
 
       const x = (e.clientX / window.innerWidth) * 100;
       const y = (e.clientY / window.innerHeight) * 100;
-      
+
       // Dispatch custom event for Ghast to attack wherever the user clicks
       window.dispatchEvent(new CustomEvent('ghast-attack', { detail: { x, y } }));
     };
@@ -97,8 +111,8 @@ const App: React.FC = () => {
               ))}
               {filteredProjects.length === 0 && (
                 <div className="col-span-full mc-panel text-center p-20 opacity-50">
-                   <h3 className="text-black">EMPTY CHUNK</h3>
-                   <p className="text-slate-600">No projects found in this biome.</p>
+                  <h3 className="text-black [text-shadow:2px_2px_#9386A0]">EMPTY CHUNK</h3>
+                  <p className="text-slate-600">No projects found in this biome.</p>
                 </div>
               )}
             </div>
@@ -109,7 +123,7 @@ const App: React.FC = () => {
           <section className="py-12 animate-in slide-in-from-bottom-8 duration-300">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               <div className="mc-panel">
-                <h2 className="mb-6 underline text-black">Player Attributes</h2>
+                <h2 className="mb-6 underline text-black [text-shadow:2px_2px_#A9A9A9]">Player Attributes</h2>
                 <div className="space-y-6">
                   {PORTFOLIO_DATA.skills.map(skill => (
                     <div key={skill.name}>
@@ -118,8 +132,8 @@ const App: React.FC = () => {
                         <span className="text-blue-600">Lv. {skill.level}</span>
                       </div>
                       <div className="w-full h-4 bg-slate-800 border-2 border-black">
-                        <div 
-                          className="h-full bg-cyan-500 shadow-[inset_0_2px_#afff80,inset_0_-2px_#3d7a1f]" 
+                        <div
+                          className="h-full bg-cyan-500 shadow-[inset_0_2px_#afff80,inset_0_-2px_#3d7a1f]"
                           style={{ width: `${skill.level}%` }}
                         ></div>
                       </div>
@@ -129,18 +143,18 @@ const App: React.FC = () => {
               </div>
               <div className="flex flex-col gap-8">
                 <div className="p-4 bg-black/40 border-4 border-slate-700 backdrop-blur-md">
-                   <SkillsRadar />
+                  <SkillsRadar />
                 </div>
-                                <div className="mc-dark-panel border-2 border-yellow-600 p-4">
-                   <h3 className="text-yellow-400 mb-2">Player Hobbies: T shapped learner</h3>
-                   <ul className="text-slate-300 text-lg space-y-1">
-                     <li>- <span className="text-white">Artist:</span> drawing, sketching, painting,</li>
-                     <li>- <span className="text-white">Music Production:</span> Linux - LMMS Studio</li>
-                     <li>- <span className="text-white">Animation:</span> Pencil2D, krita</li>
-                     <li>- <span className="text-white">Watching Movies:</span> Sci-fi, adventure, mystery</li>
-                     <li>- <span className="text-white">Watching and reading Documentries: Business case studies</span> </li>
-                     <li>- <span className="text-white">Clean Code:</span> Main ability</li>
-                   </ul>
+                <div className="mc-dark-panel border-2 border-yellow-600 p-4">
+                  <h3 className="text-yellow-400 mb-2">Player Hobbies: T shapped learner</h3>
+                  <ul className="text-slate-300 text-lg space-y-1">
+                    <li>- <span className="text-white">Artist:</span> drawing, sketching, painting,</li>
+                    <li>- <span className="text-white">Watching and reading Documentries: Business case studies</span> </li>
+                    <li>- <span className="text-white">Clean Code:</span> Main ability</li>
+                    <li>- <span className="text-white">Watching Movies:</span> Sci-fi, adventure, mystery</li>
+                    <li>- <span className="text-white">Music Production:</span> Linux - LMMS Studio, FL Studio</li>
+                    <li>- <span className="text-white">Animation:</span> Pencil2D, krita, etc</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -150,7 +164,7 @@ const App: React.FC = () => {
         return (
           <section className="py-12 max-w-4xl mx-auto animate-in slide-in-from-right-8 duration-300">
             <div className="mc-panel text-center mb-16 border-double border-8 border-slate-500 shadow-2xl">
-              <h2 className="text-black">Player World History (Quest Log)</h2>
+              <h2 className="text-black [text-shadow:2px_2px_#9386A0]">Player World History (Quest Log)</h2>
               <p className="text-slate-600">Player Journey and Education</p>
             </div>
             <div className="mc-dark-panel border-4 border-slate-600 bg-black/80">
@@ -160,6 +174,8 @@ const App: React.FC = () => {
         );
       case 'certificates':
         return <Certificates />;
+      case 'community':
+        return <Community />;
       case 'contact':
         return (
           <section className="min-h-[90vh] flex items-center justify-center py-12 animate-in zoom-in duration-300">
@@ -168,12 +184,12 @@ const App: React.FC = () => {
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-black border-2 border-black px-2 py-0.5 font-bold text-sm md:text-base shadow-[2px_2px_0px_#000] z-20 whitespace-nowrap">
                   ACHIEVEMENT UNLOCKED: THE END?
                 </div>
-                
-                <h2 className="text-black mb-6 mt-2 uppercase text-3xl md:text-5xl">Join Rohit's Server</h2>
+
+                <h2 className="text-black mb-6 mt-2 uppercase text-3xl md:text-5xl [text-shadow:2px_2px_#9386A0]">Join Rohit's Server</h2>
                 <p className="text-slate-800 text-xl md:text-2xl mb-8 italic">
                   "It's dangerous to go alone! Take me for your next project."
                 </p>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                   <div className="bg-black/10 p-3 border-2 border-black/20 text-left">
                     <h4 className="font-bold mb-1 text-sm md:text-base">DIRECT CONNECTION</h4>
@@ -188,19 +204,19 @@ const App: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button 
+                  <button
                     onClick={() => window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${PORTFOLIO_DATA.email}`, '_blank')}
                     className="mc-button py-3 px-8 text-xl md:text-2xl hover:scale-105"
                   >
                     SEND WHISPER
                   </button>
-                  <button 
+                  <button
                     onClick={() => window.open('https://www.linkedin.com/in/rohit-adepu-a52059329?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BfojK7kyjTyurWSMFj2GKgw%3D%3D', '_blank')}
                     className="mc-button py-3 px-8 text-xl md:text-2xl opacity-80 hover:opacity-100"
                   >
                     LINKEDIN
                   </button>
-                  <button 
+                  <button
                     onClick={() => window.open('https://github.com/rohitadepu07', '_blank')}
                     className="mc-button py-3 px-8 text-xl md:text-2xl opacity-80 hover:opacity-100"
                   >
@@ -220,13 +236,13 @@ const App: React.FC = () => {
     <div className={`min-h-screen relative selection:bg-cyan-400 selection:text-black flex flex-col ${isPaused ? 'overflow-hidden' : ''}`}>
       <CustomCursor />
       <Ghast />
-      <HUD 
-        onToggleChat={toggleChat} 
-        onTogglePause={togglePause} 
+      <HUD
+        onToggleChat={toggleChat}
+        onTogglePause={togglePause}
         onEmote={triggerEmote}
       />
       <Navbar currentView={view} setView={setView} />
-      
+
       <main className={`flex-1 container mx-auto px-6 lg:px-12 relative z-10 pb-40 overflow-x-hidden ${isPaused ? 'blur-sm' : ''}`}>
         {renderContent()}
       </main>
@@ -237,19 +253,19 @@ const App: React.FC = () => {
         <div className="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-md flex flex-col items-center justify-center p-6 animate-in fade-in zoom-in duration-200">
           <h2 className="text-white text-5xl md:text-7xl mb-12 drop-shadow-[4px_4px_#000] font-bold">GAME PAUSED</h2>
           <div className="flex flex-col gap-6 w-full max-w-sm">
-            <button 
+            <button
               onClick={togglePause}
               className="mc-button py-6 text-3xl"
             >
               BACK TO GAME
             </button>
-            <button 
+            <button
               onClick={() => { setView('spawn'); setIsPaused(false); }}
               className="mc-button py-6 text-3xl opacity-80"
             >
               SPAWN POINT
             </button>
-            <button 
+            <button
               onClick={() => { setIsDisconnected(true); setIsPaused(false); }}
               className="mc-button py-6 text-3xl opacity-60"
             >
@@ -260,11 +276,11 @@ const App: React.FC = () => {
       )}
 
       <footer className="min-h-screen flex flex-col items-center justify-center bg-black/90 text-center text-slate-500 text-xl border-t-4 border-slate-800 z-10 relative px-4">
-         <div className="mb-4 text-cyan-400 max-w-2xl">
-             Portfolio crafted by Rohit Adepu - Creator of this World.
+        <div className="mb-4 text-cyan-400 max-w-2xl">
+          Portfolio crafted by Rohit Adepu - Creator of this World.
         </div>
         <div className="mb-4 text-cyan-600 max-w-4xl">
-             Built with React, Tailwind CSS, and a touch of Redstone magic.
+          Built with React, Tailwind CSS, and a touch of Redstone magic.
         </div>
         <div>&copy; {new Date().getFullYear()} {PORTFOLIO_DATA.name} World. No Creepers were harmed.</div>
       </footer>

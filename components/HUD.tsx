@@ -12,19 +12,19 @@ interface HUDProps {
 }
 
 const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
-  
+
   // Now use the imported variables as the 'src'
   const PlayerIcon = () => (
-      <img src={emoteImg} alt="Emote Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
+    <img src={emoteImg} alt="Emote Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
   );
 
   const ChatIcon = () => (
-      <img src={chatImg} alt="Chat Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
+    <img src={chatImg} alt="Chat Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
   );
 
   const MenuIcon = () => (
-      <img src={pauseImg} alt="Pause Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
-  );  
+    <img src={pauseImg} alt="Pause Icon" className="w-8 h-8 md:w-10 md:h-10 object-contain pixel-art" />
+  );
 
   // ... (Rest of your component remains the same)
   const Heart: React.FC<{ full?: boolean; half?: boolean; empty?: boolean }> = ({ full = true, half = false, empty = false }) => (
@@ -66,7 +66,7 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[80] pixel-art select-none flex flex-col items-center">
-      
+
       {/* --- TOP HUD BUTTONS --- */}
       <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-[1px] pointer-events-auto">
         {[
@@ -74,7 +74,7 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
           { icon: <ChatIcon />, action: onToggleChat, title: "Chat" },
           { icon: <MenuIcon />, action: onTogglePause, title: "Pause" }
         ].map((btn, i) => (
-          <button 
+          <button
             key={i}
             onClick={btn.action}
             title={btn.title}
@@ -97,7 +97,7 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
       </div>
 
       <div className="w-full max-w-[550px] mt-auto flex flex-col items-center pb-2 md:pb-4">
-        
+
         <div className="w-full hidden md:flex justify-between ...">
           {/* Armor Bar */}
           <div className="flex">
@@ -115,7 +115,7 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
               <Heart key={`health-${i}`} full={true} />
             ))}
           </div>
-          
+
           {/* Hunger Bar */}
           <div className="flex">
             {[...Array(10)].map((_, i) => (
@@ -130,9 +130,9 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
             77
           </div>
           <div className="w-full h-2 bg-black border-2 border-[#1e1e1f] relative overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-[#3cff00] to-[#afff80] shadow-[0_0_15px_rgba(60,255,0,0.9)] transition-all duration-1000" 
-              style={{ width: '77%' }} 
+            <div
+              className="h-full bg-gradient-to-r from-[#3cff00] to-[#afff80] shadow-[0_0_15px_rgba(60,255,0,0.9)] transition-all duration-1000"
+              style={{ width: '77%' }}
             />
           </div>
         </div>

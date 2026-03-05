@@ -8,7 +8,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
   email: "rohitadepu27@gmail.com",
   bio: "Just a Creator.... with a Creative Mind, \njust keep Exploring, Learning, Building, Repeat...",
   fullBio: "Just aCreator.... with a Creative Mind, \njust keep Exploring, Learning, Building, Repeat...",
-  hobbies: ["Artist: Drawing,sketching, painting and digital art; Music Production: Linux - LMMS Studio; Animation:  Pencil2D, krita; Watching Movies:Sci-fi, adventure, mystery; Watching and reading Documentries: Business case studies; Clean Code:  Main ability" ],
+  hobbies: ["Artist: Drawing,sketching, painting and digital art; Watching Movies:Sci-fi, adventure, mystery; Watching and reading Documentries: Business case studies; Clean Code:  Main ability; Music Production: Linux - LMMS Studio; Animation:  Pencil2D, krita;"],
   projects: [
     {
       id: "factcheck",
@@ -60,7 +60,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
     { name: "Bootstrap", level: 50, category: "Frontend" },
     { name: "C/C++", level: 70, category: "System Design" },
     { name: "Python (FastAPI)", level: 50, category: "Backend" },
-    { name: "Flutter", level: 40, category: "Mobile Development"},
+    { name: "Flutter", level: 40, category: "Mobile Development" },
     { name: "React", level: 20, category: "Frontend" },
     { name: "Node.js", level: 25, category: "Backend" },
     { name: "Firebase", level: 30, category: "Backend" },
@@ -81,7 +81,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       school: "Muktangan English Medium School, Mumbai",
-      degree: "SSC - Science",
+      degree: "SSC - 10th",
       period: "Completed"
     }
   ],

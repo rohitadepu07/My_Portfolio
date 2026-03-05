@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-export type ViewType = 'spawn' | 'solo' | 'team' | 'stats' | 'questlog' | 'certificates' |'contact';
+export type ViewType = 'spawn' | 'solo' | 'team' | 'stats' | 'questlog' | 'certificates' | 'contact' | 'community';
 
 /**
  * Custom Pixel Art Icons for the Hotbar
@@ -78,6 +78,39 @@ const PixelContact = () => (
   </svg>
 );
 
+const PixelCommunity = () => (
+  <svg width="24" height="24" viewBox="0 0 16 16" className="pixel-art drop-shadow-[2px_2px_rgba(0,0,0,0.5)]">
+    {/* Body */}
+    <rect x="1" y="2" width="14" height="10" fill="#fff" />
+    {/* Tail */}
+    <rect x="3" y="12" width="6" height="1" fill="#fff" />
+    <rect x="4" y="13" width="4" height="1" fill="#fff" />
+    <rect x="5" y="14" width="2" height="1" fill="#fff" />
+
+    {/* Outline */}
+    <rect x="1" y="1" width="14" height="1" fill="#333" />
+    <rect x="0" y="2" width="1" height="10" fill="#333" />
+    <rect x="15" y="2" width="1" height="10" fill="#333" />
+    <rect x="1" y="12" width="2" height="1" fill="#333" />
+    <rect x="9" y="12" width="6" height="1" fill="#333" />
+
+    {/* Tail Outline */}
+    <rect x="3" y="13" width="1" height="1" fill="#333" />
+    <rect x="4" y="14" width="1" height="1" fill="#333" />
+    <rect x="5" y="15" width="2" height="1" fill="#333" />
+    <rect x="7" y="14" width="1" height="1" fill="#333" />
+    <rect x="8" y="13" width="1" height="1" fill="#333" />
+
+    {/* Inner Heart */}
+    <rect x="5" y="4" width="2" height="1" fill="#ef4444" />
+    <rect x="9" y="4" width="2" height="1" fill="#ef4444" />
+    <rect x="4" y="5" width="8" height="2" fill="#ef4444" />
+    <rect x="5" y="7" width="6" height="1" fill="#ef4444" />
+    <rect x="6" y="8" width="4" height="1" fill="#ef4444" />
+    <rect x="7" y="9" width="2" height="1" fill="#ef4444" />
+  </svg>
+);
+
 interface Props {
   currentView: ViewType;
   setView: (view: ViewType) => void;
@@ -100,7 +133,8 @@ const Navbar: React.FC<Props> = ({ currentView, setView }) => {
     { icon: <PixelStats />, name: 'Player Stats', view: 'stats' },
     { icon: <PixelQuest />, name: 'Quest Log', view: 'questlog' },
     { icon: <PixelCert />, name: 'Achievements', view: 'certificates' },
-    { icon: <PixelContact />, name: 'Contact Info', view: 'contact' }
+    { icon: <PixelContact />, name: 'Contact Info', view: 'contact' },
+    { icon: <PixelCommunity />, name: 'Community Hub', view: 'community' }
   ];
 
   const handleSlotClick = (item: typeof menuItems[0]) => {
@@ -109,7 +143,7 @@ const Navbar: React.FC<Props> = ({ currentView, setView }) => {
     setTimeout(() => setPopupName(null), 2100);
   };
 
-  const emptySlotsCount = isMobile ? 0 : 3;
+  const emptySlotsCount = isMobile ? 0 : 2;
 
   return (
     <div className="hotbar pixel-art !bottom-1 md:!bottom-2" role="navigation">
@@ -120,8 +154,8 @@ const Navbar: React.FC<Props> = ({ currentView, setView }) => {
       )}
 
       {menuItems.map((item, i) => (
-        <button 
-          key={i} 
+        <button
+          key={i}
           onClick={() => handleSlotClick(item)}
           className={`hotbar-slot ${currentView === item.view ? 'active' : ''} group transition-all`}
           aria-label={item.name}
@@ -129,7 +163,7 @@ const Navbar: React.FC<Props> = ({ currentView, setView }) => {
           <div className="transform scale-110 md:scale-125">
             {item.icon}
           </div>
-          
+
           <div className="absolute -top-12 left-1/2 -translate-x-1/2 bg-[#1e1e1f] border-2 border-[#535355] px-3 py-1 text-sm text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-[110] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.5)] hidden md:block">
             {item.name}
           </div>
@@ -137,7 +171,7 @@ const Navbar: React.FC<Props> = ({ currentView, setView }) => {
       ))}
 
       {[...Array(emptySlotsCount)].map((_, i) => (
-        <div key={i+menuItems.length} className="hotbar-slot opacity-20 bg-black/10"></div>
+        <div key={i + menuItems.length} className="hotbar-slot opacity-20 bg-black/10"></div>
       ))}
     </div>
   );
