@@ -2,7 +2,7 @@
 <img width="1200" height="475" alt="GHBanner" src="image.png" />
 </div>
 
-<h1 align="center">⚔️ Rohit Adepu's Interactive Portfolio ⛏️</h1>
+<h1 align="center">⚔️ Creative Portfolio ⛏️</h1>
 
 <p align="center">
   <strong>A highly interactive, gamified, and pixel-perfect personal portfolio built with React & Tailwind CSS.</strong>
