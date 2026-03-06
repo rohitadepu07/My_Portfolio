@@ -61,6 +61,15 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
                         </p>
                     </div>
 
+                    <div className="bg-black/10 p-4 border-2 border-red-500/40">
+                        <h3 className="font-bold text-xl mb-2 flex items-center gap-2 text-red-500 text-shadow-none drop-shadow-[1px_1px_rgba(0,0,0,0.8)]">
+                            <span className="text-2xl">⚠️</span> Herobrine...
+                        </h3>
+                        <p className="text-red-700">
+                            Be fully warned, the elusive Herobrine is always watching your messages... For those who don't know, Herobrine is a legendary, creepy urban legend in Minecraft—a mysterious ghost player with glowing white eyes who haunts servers, stalks players, and builds weird structures without reason. Never trust what he says.
+                        </p>
+                    </div>
+
                     <div className="bg-black/10 p-4 border-2 border-black/20">
                         <h3 className="font-bold text-xl mb-2 flex items-center gap-2">
                             <span className="text-2xl">🚪</span> Nether Portal

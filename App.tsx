@@ -17,7 +17,9 @@ import { PORTFOLIO_DATA } from './constants';
 import { supabase } from './services/supabase';
 
 const App: React.FC = () => {
-  const [view, setView] = useState<ViewType>('spawn');
+  const [view, setView] = useState<ViewType>(() => {
+    return (sessionStorage.getItem('mc_portfolio_view') as ViewType) || 'spawn';
+  });
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isDisconnected, setIsDisconnected] = useState(false);
@@ -28,6 +30,7 @@ const App: React.FC = () => {
 
   // Reset scroll position when view changes
   useEffect(() => {
+    sessionStorage.setItem('mc_portfolio_view', view);
     window.scrollTo(0, 0);
   }, [view]);
 

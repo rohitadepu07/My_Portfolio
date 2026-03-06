@@ -35,9 +35,7 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
     const handleLogout = () => {
         localStorage.removeItem('mc_portfolio_user');
         localStorage.removeItem('mc_portfolio_has_liked');
-        window.dispatchEvent(new Event('mc_profile_updated'));
-        setUsername('');
-        onClose();
+        window.location.reload();
     };
 
     if (!isOpen) return null;
@@ -56,12 +54,11 @@ const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) => {
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className="w-full bg-white border-2 border-black px-3 py-2 text-black focus:outline-none shadow-[inset_2px_2px_#aaa] font-['VT323'] text-2xl"
-                        placeholder="Enter Username"
+                        placeholder="Enter Your Name"
                         maxLength={20}
                     />
                     <p className="text-xs text-slate-700 mt-2 font-['VT323'] text-lg leading-tight">
-                        Setting a username allows you to chat and drop likes in the Community Hub!
-                    </p>
+                        You can update your username anytime above.Setting a username allows you to chat and drop likes in the Community Hub!                    </p>
                 </div>
 
                 <div className="flex flex-col gap-3">

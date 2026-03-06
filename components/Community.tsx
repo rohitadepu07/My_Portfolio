@@ -130,8 +130,12 @@ const Community: React.FC = () => {
 
         if (newHasLiked) {
             await supabase.rpc('increment_likes');
+            // Record who liked the web
+            await supabase.from('user_likes').insert([{ username: user.username }]);
         } else {
             await supabase.rpc('decrement_likes');
+            // Remove the user's like record
+            await supabase.from('user_likes').delete().eq('username', user.username);
         }
 
         // Optimistic UI update
@@ -273,11 +277,13 @@ const Community: React.FC = () => {
                     className="space-y-1 overflow-y-auto custom-scrollbar flex-1 mb-2 px-2 drop-shadow-[1px_1px_#000]"
                 >
                     <div className="text-[#55ff55]">[INFO] Connecting to server...</div>
-                    <div className="text-[#55ff55]">[INFO] Logging in...</div>
-                    <div className="text-[#ffff55]">[WARN] OptiFine not detected. Graphics may be pixelated.</div>
                     <div className="text-[#55ff55]">[INFO] Successfully joined game.</div>
                     <div className="text-white">
                         <span className="text-[#55ffff] hover:underline cursor-pointer">[CHAT]</span> {'<System>'} Welcome to the portfolio!
+                    </div>
+
+                    <div className="text-[#ff5555]">
+                        <span className="text-[#55ffff] hover:underline cursor-pointer">[CHAT]</span> {'<System>'} [WARNING] Be fully warned, the elusive Herobrine is always watching your messages... For those who don't know, Herobrine is a legendary, creepy urban legend in Minecraft—a mysterious ghost player with glowing white eyes who haunts servers, stalks players, and builds weird structures without reason. Never trust what he says.
                     </div>
 
                     {hasLiked && (
@@ -308,7 +314,7 @@ const Community: React.FC = () => {
                         <input
                             type="text"
                             className="flex-1 bg-black/60 text-white px-3 py-2 border-[2px] border-[#333] focus:border-[#55ffff] focus:bg-black outline-none transition-colors font-sans text-sm drop-shadow-[1px_1px_0_#000]"
-                            placeholder={user.isLoggedIn ? "Type a message directly to chat..." : "Enter your username to join the server..."}
+                            placeholder={user.isLoggedIn ? "Type a message directly to chat..." : "Enter your name to join the server..."}
                             value={user.isLoggedIn ? newComment : tempUsername}
                             onChange={e => user.isLoggedIn ? setNewComment(e.target.value) : setTempUsername(e.target.value)}
                             maxLength={100}
