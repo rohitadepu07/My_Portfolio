@@ -9,9 +9,10 @@ interface HUDProps {
   onToggleChat: () => void;
   onTogglePause: () => void;
   onEmote: () => void;
+  onToggleInfo: () => void;
 }
 
-const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
+const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote, onToggleInfo }) => {
 
   // Now use the imported variables as the 'src'
   const PlayerIcon = () => (
@@ -94,6 +95,26 @@ const HUD: React.FC<HUDProps> = ({ onToggleChat, onTogglePause, onEmote }) => {
             </div>
           </button>
         ))}
+      </div>
+
+      {/* --- INFO BUTTON (TOP RIGHT) --- */}
+      <div className="absolute top-4 right-4 pointer-events-auto">
+        <button
+          onClick={onToggleInfo}
+          title="Information / Guide"
+          className="
+            w-6 h-6 md:w-8 md:h-8 
+            bg-[#8b8b8b] 
+            border-[2px] border-black 
+            flex items-center justify-center 
+            shadow-[inset_-2px_-2px_#444,inset_2px_2px_#bbb] 
+            hover:bg-[#9a9a9a] 
+            active:translate-y-[1px]
+            transition-all duration-75
+          "
+        >
+          <span className="text-black font-bold text-base drop-shadow-[1px_1px_#fff]">i</span>
+        </button>
       </div>
 
       <div className="w-full max-w-[550px] mt-auto flex flex-col items-center pb-2 md:pb-4">

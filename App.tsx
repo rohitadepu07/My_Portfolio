@@ -12,6 +12,7 @@ import CustomCursor from './components/CustomCursor';
 import HUD from './components/HUD';
 import PlayerEmote from './components/PlayerEmote';
 import Ghast from './components/Ghast';
+import InfoModal from './components/InfoModal';
 import { PORTFOLIO_DATA } from './constants';
 import { supabase } from './services/supabase';
 
@@ -21,6 +22,7 @@ const App: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isDisconnected, setIsDisconnected] = useState(false);
   const [isEmoting, setIsEmoting] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
 
 
@@ -31,6 +33,7 @@ const App: React.FC = () => {
 
   const toggleChat = () => setIsChatOpen(!isChatOpen);
   const togglePause = () => setIsPaused(!isPaused);
+  const toggleInfo = () => setIsInfoOpen(!isInfoOpen);
 
   const triggerEmote = () => {
     setIsEmoting(true);
@@ -41,21 +44,7 @@ const App: React.FC = () => {
     setView('spawn');
   };
 
-  // Global click listener for Ghast attack
-  useEffect(() => {
-    const handleGlobalClick = (e: MouseEvent) => {
-      if (isPaused || isDisconnected) return;
 
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-
-      // Dispatch custom event for Ghast to attack wherever the user clicks
-      window.dispatchEvent(new CustomEvent('ghast-attack', { detail: { x, y } }));
-    };
-
-    window.addEventListener('mousedown', handleGlobalClick);
-    return () => window.removeEventListener('mousedown', handleGlobalClick);
-  }, [isPaused, isDisconnected]);
 
   if (isDisconnected) {
     return (
@@ -230,6 +219,7 @@ const App: React.FC = () => {
         onToggleChat={toggleChat}
         onTogglePause={togglePause}
         onEmote={triggerEmote}
+        onToggleInfo={toggleInfo}
       />
       <Navbar currentView={view} setView={setView} />
 
@@ -276,6 +266,7 @@ const App: React.FC = () => {
       </footer>
 
       <ChatAssistant isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
+      <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
     </div>
   );
 };
