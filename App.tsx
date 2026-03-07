@@ -19,9 +19,7 @@ import { supabase } from './services/supabase';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>(() => {
-    const savedView = sessionStorage.getItem('mc_portfolio_view') as ViewType;
-    if (savedView === '404') return 'spawn';
-    return savedView || 'spawn';
+    return (sessionStorage.getItem('mc_portfolio_view') as ViewType) || 'spawn';
   });
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -33,13 +31,11 @@ const App: React.FC = () => {
 
   // Reset scroll position when view changes
   useEffect(() => {
-    if (view !== '404') {
-      sessionStorage.setItem('mc_portfolio_view', view);
-    }
+    sessionStorage.setItem('mc_portfolio_view', view);
     window.scrollTo(0, 0);
   }, [view]);
 
-  // Handle offline state & 404
+  // Handle offline state
   useEffect(() => {
     const handleOffline = () => setView('404');
     const handleOnline = () => setView((prev) => prev === '404' ? 'spawn' : prev);
@@ -48,8 +44,6 @@ const App: React.FC = () => {
     window.addEventListener('online', handleOnline);
 
     if (!navigator.onLine) {
-      setView('404');
-    } else if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
       setView('404');
     }
 
@@ -249,14 +243,16 @@ const App: React.FC = () => {
       <CustomCursor />
       <Ghast />
       {view !== '404' && (
-        <HUD
-          onToggleChat={toggleChat}
-          onTogglePause={togglePause}
-          onEmote={triggerEmote}
-          onToggleInfo={toggleInfo}
-        />
+        <>
+          <HUD
+            onToggleChat={toggleChat}
+            onTogglePause={togglePause}
+            onEmote={triggerEmote}
+            onToggleInfo={toggleInfo}
+          />
+          <Navbar currentView={view} setView={setView} />
+        </>
       )}
-      {view !== '404' && <Navbar currentView={view} setView={setView} />}
 
       <main className={`flex-1 container mx-auto px-6 lg:px-12 relative z-10 pb-40 overflow-x-hidden ${isPaused ? 'blur-sm' : ''}`}>
         {renderContent()}
@@ -290,18 +286,18 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <footer className="min-h-screen flex flex-col items-center justify-center bg-black/90 text-center text-slate-500 text-xl border-t-4 border-slate-800 z-10 relative px-4">
-        <div className="mb-4 text-cyan-400 max-w-2xl">
-          Portfolio crafted by Rohit Adepu - Creator of this World.
-        </div>
-        <div className="mb-4 text-cyan-600 max-w-4xl">
-          Built with React, Tailwind CSS, and a touch of Redstone magic.
-        </div>
-        <div>&copy; {new Date().getFullYear()} {PORTFOLIO_DATA.name} World. No Creepers were harmed.</div>
-      </footer>
-
       {view !== '404' && (
         <>
+          <footer className="min-h-screen flex flex-col items-center justify-center bg-black/90 text-center text-slate-500 text-xl border-t-4 border-slate-800 z-10 relative px-4">
+            <div className="mb-4 text-cyan-400 max-w-2xl">
+              Portfolio crafted by Rohit Adepu - Creator of this World.
+            </div>
+            <div className="mb-4 text-cyan-600 max-w-4xl">
+              Built with React, Tailwind CSS, and a touch of Redstone magic.
+            </div>
+            <div>&copy; {new Date().getFullYear()} {PORTFOLIO_DATA.name} World. No Creepers were harmed.</div>
+          </footer>
+
           <ChatAssistant isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
           <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
         </>
