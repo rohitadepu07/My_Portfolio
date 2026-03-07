@@ -17,9 +17,8 @@ const NotFound: React.FC<Props> = ({ onReturn }) => {
                 </h1>
 
                 <img
-                    src="components/Icon/error.png"
+                    src="./components/Icon/error.png"
                     alt="Connection Lost Creeper"
-                    className="mx-auto w-48 h-48 md:w-64 md:h-64 object-cover pixel-art rounded-lg border-4 border-black shadow-[4px_4px_0px_#000] mb-8"
                 />
 
                 <p className="text-xl md:text-3xl text-white mb-8 font-bold [text-shadow:2px_2px_#000]">

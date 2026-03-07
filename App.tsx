@@ -19,7 +19,9 @@ import { supabase } from './services/supabase';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>(() => {
-    return (sessionStorage.getItem('mc_portfolio_view') as ViewType) || 'spawn';
+    const savedView = sessionStorage.getItem('mc_portfolio_view') as ViewType;
+    if (savedView === '404') return 'spawn';
+    return savedView || 'spawn';
   });
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -31,7 +33,9 @@ const App: React.FC = () => {
 
   // Reset scroll position when view changes
   useEffect(() => {
-    sessionStorage.setItem('mc_portfolio_view', view);
+    if (view !== '404') {
+      sessionStorage.setItem('mc_portfolio_view', view);
+    }
     window.scrollTo(0, 0);
   }, [view]);
 
