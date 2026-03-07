@@ -38,9 +38,9 @@ const Ghast: React.FC = () => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!visible) setVisible(true);
       // Offset the target position so the Ghast hovers near, but not exactly under, the cursor.
-      // E.g., slightly to the top-right of the pointer.
-      const offsetX = 5; // roughly 5% viewport width offset
-      const offsetY = -10; // roughly 10% viewport height offset
+      // E.g., considerably to the top-right of the pointer.
+      const offsetX = 8; // roughly 8% viewport width offset
+      const offsetY = -15; // roughly 15% viewport height offset
 
       const x = (e.clientX / window.innerWidth) * 100 + offsetX;
       const y = (e.clientY / window.innerHeight) * 100 + offsetY;

@@ -95,7 +95,18 @@ const Community: React.FC = () => {
         const channels = supabase.channel('pub-sub-channel')
             .on('postgres_changes', { event: '*', schema: 'public', table: 'comments' }, payload => {
                 if (payload.eventType === 'INSERT') {
-                    setComments(prev => [...prev, payload.new as Comment]);
+                    setComments(prev => {
+                        const newComment = payload.new as Comment;
+                        if (prev.some(c => c.id === newComment.id)) return prev;
+                        // Replace optimistic comment based on matching text/username
+                        const tempIndex = prev.findIndex(c => c.text === newComment.text && c.username === newComment.username && c.id.toString().startsWith('temp_'));
+                        if (tempIndex !== -1) {
+                            const updated = [...prev];
+                            updated[tempIndex] = newComment;
+                            return updated;
+                        }
+                        return [...prev, newComment];
+                    });
                 }
             })
             .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'global_stats' }, payload => {
@@ -174,16 +185,24 @@ const Community: React.FC = () => {
                     return;
                 }
 
+                const tempId = 'temp_' + Date.now();
+                const ts = Date.now();
                 const commentPayload = {
+                    id: tempId,
                     username: user.username,
                     text: commentText,
-                    timestamp: Date.now()
+                    timestamp: ts
                 };
 
                 setNewComment('');
+                setComments(prev => [...prev, commentPayload]);
 
-                // Write to Supabase (realtime subscription will update UI)
-                await supabase.from('comments').insert([commentPayload]);
+                // Write to Supabase
+                await supabase.from('comments').insert([{
+                    username: user.username,
+                    text: commentText,
+                    timestamp: ts
+                }]);
             }
         }
     };
@@ -292,11 +311,16 @@ const Community: React.FC = () => {
                         </div>
                     )}
 
-                    {comments.map(comment => (
-                        <div key={comment.id} className="text-white">
-                            <span className="text-[#55ffff] hover:underline cursor-pointer">[CHAT]</span> {'<' + comment.username + '>'} {comment.text}
-                        </div>
-                    ))}
+                    {comments.map(comment => {
+                        const date = new Date(comment.timestamp);
+                        const timeStr = isNaN(date.getTime()) ? '' : `[${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}] `;
+                        return (
+                            <div key={comment.id} className="text-white">
+                                <span className="text-[#888888] text-xs mr-2">{timeStr}</span>
+                                <span className="text-[#55ffff] hover:underline cursor-pointer">[CHAT]</span> {'<' + comment.username + '>'} {comment.text}
+                            </div>
+                        );
+                    })}
 
                     <div className="text-[#aaaaaa]">
                         <span className="text-[#55ffff] hover:underline cursor-pointer">[CHAT]</span> {'<Herobrine>'} I am watching you...
