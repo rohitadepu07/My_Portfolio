@@ -35,11 +35,22 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   }, [view]);
 
-  // Check URL for 404
+  // Handle offline state
   useEffect(() => {
-    if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+    const handleOffline = () => setView('404');
+    const handleOnline = () => setView((prev) => prev === '404' ? 'spawn' : prev);
+
+    window.addEventListener('offline', handleOffline);
+    window.addEventListener('online', handleOnline);
+
+    if (!navigator.onLine) {
       setView('404');
     }
+
+    return () => {
+      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener('online', handleOnline);
+    };
   }, []);
 
   const toggleChat = () => setIsChatOpen(!isChatOpen);
