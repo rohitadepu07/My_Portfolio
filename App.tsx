@@ -62,12 +62,13 @@ const App: React.FC = () => {
   };
 
   const handleReconnect = () => {
-    if (!navigator.onLine) {
-      alert("Oof! Still no internet. Check your connection!");
-      return;
+    if (navigator.onLine) {
+      setIsDisconnected(false);
+      setView('spawn');
+    } else {
+      // Re-trigger the error page sound and effect if they click while still offline
+      setIsDisconnected(true);
     }
-    setIsDisconnected(false);
-    setView('spawn');
   };
 
 
