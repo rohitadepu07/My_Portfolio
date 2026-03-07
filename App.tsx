@@ -35,7 +35,7 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   }, [view]);
 
-  // Handle offline state
+  // Handle offline state & 404
   useEffect(() => {
     const handleOffline = () => setView('404');
     const handleOnline = () => setView((prev) => prev === '404' ? 'spawn' : prev);
@@ -44,6 +44,8 @@ const App: React.FC = () => {
     window.addEventListener('online', handleOnline);
 
     if (!navigator.onLine) {
+      setView('404');
+    } else if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
       setView('404');
     }
 
