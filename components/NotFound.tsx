@@ -12,27 +12,23 @@ const NotFound: React.FC<Props> = ({ onReturn }) => {
                     NO INTERNET
                 </div>
 
-                <div className="flex justify-center mb-6 mt-4">
-                    <img src="./Icon/error.png" alt="Oof! Disconnected" className="w-48 h-48 md:w-64 md:h-64 drop-shadow-[4px_4px_#000] pixel-art" />
-                </div>
-
-                <h1 className="text-red-500 text-5xl md:text-7xl mb-6 font-bold drop-shadow-[4px_4px_#000]">
+                <h1 className="text-red-500 text-5xl md:text-7xl mb-6 font-bold drop-shadow-[4px_4px_#000] mt-4">
                     Oof!
                 </h1>
 
                 <p className="text-xl md:text-3xl text-white mb-8 font-bold [text-shadow:2px_2px_#000]">
-                    You dug too deep and fell out of the world.
+                    You lost connection to the server.
                 </p>
 
                 <div className="text-slate-300 text-lg md:text-xl mb-12 italic">
-                    "The chunk you are looking for has been corrupted or never generated."
+                    "Check your Wi-Fi or router to reconnect to the world."
                 </div>
 
                 <button
                     onClick={onReturn}
                     className="mc-button py-4 px-8 text-2xl md:text-3xl hover:scale-105 transition-transform"
                 >
-                    RESPAWN
+                    RETRY CONNECTION
                 </button>
             </div>
         </section>

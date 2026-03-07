@@ -37,14 +37,14 @@ const App: React.FC = () => {
 
   // Handle offline state
   useEffect(() => {
-    const handleOffline = () => setIsDisconnected(true);
-    const handleOnline = () => setIsDisconnected(false);
+    const handleOffline = () => setView('404');
+    const handleOnline = () => setView((prev) => prev === '404' ? 'spawn' : prev);
 
     window.addEventListener('offline', handleOffline);
     window.addEventListener('online', handleOnline);
 
     if (!navigator.onLine) {
-      setIsDisconnected(true);
+      setView('404');
     }
 
     return () => {
@@ -70,9 +70,19 @@ const App: React.FC = () => {
 
   if (isDisconnected) {
     return (
-      <div className="min-h-screen relative selection:bg-cyan-400 selection:text-black flex flex-col bg-[#1a1a1a]">
+      <div className="min-h-screen bg-[#1a1a1a] flex flex-col items-center justify-center p-6 text-center select-none">
         <CustomCursor />
-        <NotFound onReturn={handleReconnect} />
+        <div className="max-w-2xl w-full flex flex-col items-center animate-in fade-in duration-500">
+          <h1 className="text-white text-4xl md:text-6xl mb-8 drop-shadow-[4px_4px_#000] font-bold">
+            Connection Lost
+          </h1>
+          <div className="text-red-600 text-2xl md:text-3xl mb-12 font-bold uppercase tracking-wider drop-shadow-[2px_2px_#000]">
+            Server Disconnected
+          </div>
+          <h1 className="text-white text-4xl md:text-4xl mb-8 drop-shadow-[4px_4px_#000] font-bold">
+            Reload Web... To Spawn Againn...
+          </h1>
+        </div>
       </div>
     );
   }
@@ -218,7 +228,11 @@ const App: React.FC = () => {
             </div>
           </section>
         );
-
+      case '404':
+        return <NotFound onReturn={() => {
+          window.history.pushState({}, '', '/');
+          setView('spawn');
+        }} />;
       default:
         return <Hero onSetView={(v) => setView(v)} />;
     }
@@ -228,13 +242,17 @@ const App: React.FC = () => {
     <div className={`min-h-screen relative selection:bg-cyan-400 selection:text-black flex flex-col ${isPaused ? 'overflow-hidden' : ''}`}>
       <CustomCursor />
       <Ghast />
-      <HUD
-        onToggleChat={toggleChat}
-        onTogglePause={togglePause}
-        onEmote={triggerEmote}
-        onToggleInfo={toggleInfo}
-      />
-      <Navbar currentView={view} setView={setView} />
+      {view !== '404' && (
+        <>
+          <HUD
+            onToggleChat={toggleChat}
+            onTogglePause={togglePause}
+            onEmote={triggerEmote}
+            onToggleInfo={toggleInfo}
+          />
+          <Navbar currentView={view} setView={setView} />
+        </>
+      )}
 
       <main className={`flex-1 container mx-auto px-6 lg:px-12 relative z-10 pb-40 overflow-x-hidden ${isPaused ? 'blur-sm' : ''}`}>
         {renderContent()}

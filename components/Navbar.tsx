@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-export type ViewType = 'spawn' | 'solo' | 'team' | 'stats' | 'questlog' | 'certificates' | 'contact' | 'community';
+export type ViewType = 'spawn' | 'solo' | 'team' | 'stats' | 'questlog' | 'certificates' | 'contact' | 'community' | '404';
 
 /**
  * Custom Pixel Art Icons for the Hotbar
