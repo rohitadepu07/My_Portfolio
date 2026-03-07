@@ -1,9 +1,8 @@
 const CACHE_NAME = 'rohit-portfolio-v1';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/offline.png',
-    '/favicon.ico',
+    './',
+    './index.html',
+    './favicon.ico',
 ];
 
 self.addEventListener('install', (event) => {
@@ -58,7 +57,7 @@ self.addEventListener('fetch', (event) => {
             }).catch(() => {
                 // If network fails and it's a navigation request, serve index.html
                 if (event.request.mode === 'navigate') {
-                    return caches.match('/index.html') || caches.match('/');
+                    return caches.match('./index.html') || caches.match('./');
                 }
             });
         })

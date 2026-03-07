@@ -31,7 +31,9 @@ const App: React.FC = () => {
 
   // Reset scroll position when view changes
   useEffect(() => {
-    sessionStorage.setItem('mc_portfolio_view', view);
+    if (view !== '404') {
+      sessionStorage.setItem('mc_portfolio_view', view);
+    }
     window.scrollTo(0, 0);
   }, [view]);
 
@@ -235,8 +237,13 @@ const App: React.FC = () => {
         );
       case '404':
         return <NotFound onReturn={() => {
-          window.history.pushState({}, '', '/');
-          setView('spawn');
+          if (navigator.onLine) {
+            window.history.pushState({}, '', window.location.pathname.startsWith('/My_Portfolio') ? '/My_Portfolio/' : '/');
+            setView('spawn');
+          } else {
+            // Reloads the page. Since offline, SW catches it and remounts, playing sound again.
+            window.location.reload();
+          }
         }} />;
       default:
         return <Hero onSetView={(v) => setView(v)} />;
