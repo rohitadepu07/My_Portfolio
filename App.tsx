@@ -242,13 +242,15 @@ const App: React.FC = () => {
     <div className={`min-h-screen relative selection:bg-cyan-400 selection:text-black flex flex-col ${isPaused ? 'overflow-hidden' : ''}`}>
       <CustomCursor />
       <Ghast />
-      <HUD
-        onToggleChat={toggleChat}
-        onTogglePause={togglePause}
-        onEmote={triggerEmote}
-        onToggleInfo={toggleInfo}
-      />
-      <Navbar currentView={view} setView={setView} />
+      {view !== '404' && (
+        <HUD
+          onToggleChat={toggleChat}
+          onTogglePause={togglePause}
+          onEmote={triggerEmote}
+          onToggleInfo={toggleInfo}
+        />
+      )}
+      {view !== '404' && <Navbar currentView={view} setView={setView} />}
 
       <main className={`flex-1 container mx-auto px-6 lg:px-12 relative z-10 pb-40 overflow-x-hidden ${isPaused ? 'blur-sm' : ''}`}>
         {renderContent()}
@@ -292,8 +294,12 @@ const App: React.FC = () => {
         <div>&copy; {new Date().getFullYear()} {PORTFOLIO_DATA.name} World. No Creepers were harmed.</div>
       </footer>
 
-      <ChatAssistant isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
-      <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
+      {view !== '404' && (
+        <>
+          <ChatAssistant isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
+          <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
+        </>
+      )}
     </div>
   );
 };
