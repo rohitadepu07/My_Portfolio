@@ -1,5 +1,5 @@
 import React from 'react';
-import errorImg from './Icon/error.png';
+import { errorImgBase64 } from './Icon/errorBase64';
 
 interface Props {
     onReturn: () => void;
@@ -18,7 +18,7 @@ const NotFound: React.FC<Props> = ({ onReturn }) => {
                 </h1>
 
                 <div className="flex justify-center mb-6 mt-4">
-                    <img src={errorImg} alt="Oof! Disconnected" className="w-48 h-48 md:w-64 md:h-64 drop-shadow-[4px_4px_#000] pixel-art" />
+                    <img src={errorImgBase64} alt="Oof! Disconnected" className="w-48 h-48 md:w-64 md:h-64 drop-shadow-[4px_4px_#000] pixel-art" />
                 </div>
 
                 <p className="text-xl md:text-3xl text-white mb-8 font-bold [text-shadow:2px_2px_#000]">
