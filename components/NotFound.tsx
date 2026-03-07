@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { errorImgBase64 } from './Icon/errorBase64';
+import { reeeeBase64 } from './Icon/ReeeeBase64';
 
 interface Props {
     onReturn: () => void;
 }
 
 const NotFound: React.FC<Props> = ({ onReturn }) => {
+    useEffect(() => {
+        const audio = new Audio(reeeeBase64);
+        audio.play().catch(e => console.log("Audio autoplay prevented by browser"));
+    }, []);
+
     return (
         <section className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center animate-in fade-in zoom-in duration-500">
             <div className="mc-panel p-8 md:p-16 max-w-3xl w-full border-8 border-slate-700 bg-slate-800/90 relative shadow-[12px_12px_0px_rgba(0,0,0,0.5)]">
@@ -14,7 +20,7 @@ const NotFound: React.FC<Props> = ({ onReturn }) => {
                 </div>
 
                 <h1 className="text-red-500 text-5xl md:text-7xl mb-6 font-bold drop-shadow-[4px_4px_#000] mt-4">
-                    Oof!
+                    Aaaaa!
                 </h1>
 
                 <div className="flex justify-center mb-6 mt-4">
