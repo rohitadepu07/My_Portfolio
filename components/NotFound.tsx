@@ -16,6 +16,10 @@ const NotFound: React.FC<Props> = ({ onReturn }) => {
                     Oof!
                 </h1>
 
+                <div className="flex justify-center mb-6 mt-4">
+                    <img src="./Icon/error.png" alt="Oof! Disconnected" className="w-48 h-48 md:w-64 md:h-64 drop-shadow-[4px_4px_#000] pixel-art" />
+                </div>
+
                 <p className="text-xl md:text-3xl text-white mb-8 font-bold [text-shadow:2px_2px_#000]">
                     You lost connection to the server.
                 </p>
