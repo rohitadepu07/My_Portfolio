@@ -62,6 +62,10 @@ const App: React.FC = () => {
   };
 
   const handleReconnect = () => {
+    if (!navigator.onLine) {
+      alert("Oof! Still no internet. Check your connection!");
+      return;
+    }
     setIsDisconnected(false);
     setView('spawn');
   };
