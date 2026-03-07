@@ -13,6 +13,7 @@ import HUD from './components/HUD';
 import PlayerEmote from './components/PlayerEmote';
 import Ghast from './components/Ghast';
 import InfoModal from './components/InfoModal';
+import NotFound from './components/NotFound';
 import { PORTFOLIO_DATA } from './constants';
 import { supabase } from './services/supabase';
 
@@ -33,6 +34,13 @@ const App: React.FC = () => {
     sessionStorage.setItem('mc_portfolio_view', view);
     window.scrollTo(0, 0);
   }, [view]);
+
+  // Check URL for 404
+  useEffect(() => {
+    if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+      setView('404');
+    }
+  }, []);
 
   const toggleChat = () => setIsChatOpen(!isChatOpen);
   const togglePause = () => setIsPaused(!isPaused);
@@ -209,6 +217,11 @@ const App: React.FC = () => {
             </div>
           </section>
         );
+      case '404':
+        return <NotFound onReturn={() => {
+          window.history.pushState({}, '', '/');
+          setView('spawn');
+        }} />;
       default:
         return <Hero onSetView={(v) => setView(v)} />;
     }
