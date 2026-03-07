@@ -82,7 +82,8 @@ const Community: React.FC = () => {
             const { data: commentsData } = await supabase
                 .from('comments')
                 .select('*')
-                .order('timestamp', { ascending: true });
+                .order('timestamp', { ascending: true })
+                .limit(1000);
 
             if (commentsData) {
                 setComments(commentsData);
@@ -320,9 +321,11 @@ const Community: React.FC = () => {
                         const minutes = date.getMinutes().toString().padStart(2, '0');
                         const timeStr = isNaN(date.getTime()) ? '' : `[${day}/${month}/${year} ${hours}:${minutes}] `;
                         return (
-                            <div key={comment.id} className="text-white">
-                                <span className="text-[#888888] text-xs mr-2">{timeStr}</span>
-                                <span className="text-[#55ffff] hover:underline cursor-pointer">[CHAT]</span> {'<' + comment.username + '>'} {comment.text}
+                            <div key={comment.id} className="text-white flex justify-between items-start gap-2">
+                                <div className="break-words">
+                                    <span className="text-[#55ffff] hover:underline cursor-pointer">[CHAT]</span> {'<' + comment.username + '>'} {comment.text}
+                                </div>
+                                <span className="text-[#888888] text-xs whitespace-nowrap pt-1 shrink-0">{timeStr}</span>
                             </div>
                         );
                     })}
