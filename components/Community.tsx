@@ -30,6 +30,7 @@ const Community: React.FC = () => {
     const [newComment, setNewComment] = useState('');
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [showLoginWarning, setShowLoginWarning] = useState(false);
+    const [supabaseError, setSupabaseError] = useState<string | null>(null);
     const [showProfanityWarning, setShowProfanityWarning] = useState(false);
     const [isCreativeMode, setIsCreativeMode] = useState(false);
 
@@ -59,11 +60,17 @@ const Community: React.FC = () => {
 
         const fetchData = async () => {
             // Fetch initial stats
-            const { data: statsData } = await supabase
+            const { data: statsData, error: statsError } = await supabase
                 .from('global_stats')
                 .select('*')
                 .eq('id', 1)
                 .single();
+
+            if (statsError) {
+                console.error('Supabase global_stats fetch failed', statsError);
+                setSupabaseError(`Load failed: ${statsError.message}`);
+                return;
+            }
 
             if (statsData) {
                 setLikes(statsData.likes);
@@ -73,17 +80,25 @@ const Community: React.FC = () => {
                     sessionStorage.setItem('mc_portfolio_visited', 'true');
                     // Delay increment so the user visibly sees the counter go up
                     setTimeout(async () => {
-                        await supabase.rpc('increment_visitors');
+                        const { error: incErr } = await supabase.rpc('increment_visitors');
+                        if (incErr) {
+                            console.error('increment_visitors RPC failed', incErr);
+                        }
                     }, 1000);
                 }
             }
 
             // Fetch initial comments
-            const { data: commentsData } = await supabase
+            const { data: commentsData, error: commentsError } = await supabase
                 .from('comments')
                 .select('*')
                 .order('timestamp', { ascending: true })
                 .limit(1000);
+
+            if (commentsError) {
+                console.error('Supabase comments fetch failed', commentsError);
+                setSupabaseError(prev => prev ? prev : `Load failed: ${commentsError.message}`);
+            }
 
             if (commentsData) {
                 setComments(commentsData);
@@ -210,9 +225,13 @@ const Community: React.FC = () => {
 
     return (
         <section className={`pt-14 pb-4 md:pt-[72px] px-4 mx-auto animate-in fade-in zoom-in duration-300 relative font-['VT323',_monospace] flex flex-col items-center gap-6 z-10 w-full max-w-7xl transition-all duration-1000 ${isCreativeMode ? 'drop-shadow-[0_0_50px_rgba(85,255,255,0.4)] scale-[1.02]' : ''}`}>
+            {supabaseError && (
+                <div className="w-full text-center bg-[#330000] border border-[#770000] text-[#ffaaaa] p-2 rounded mb-2">
+                    Supabase issue: {supabaseError}. Check environment vars (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY) and Supabase CORS origins.
+                </div>
+            )}
             {isCreativeMode && (
                 <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
-                    <div className="absolute inset-0 bg-[#55ffff]/5 animate-pulse mix-blend-screen"></div>
                     <div className="absolute top-[10%] left-[5%] text-[#55ffff]/30 text-6xl animate-bounce">⊹</div>
                     <div className="absolute top-[30%] right-[10%] text-[#55ffff]/30 text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>⊹</div>
                     <div className="absolute bottom-[20%] left-[15%] text-[#55ffff]/30 text-5xl animate-bounce" style={{ animationDelay: '1s' }}>⊹</div>
