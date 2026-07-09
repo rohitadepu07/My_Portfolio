@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rohit-portfolio-v1';
+const CACHE_NAME = 'rohit-portfolio-v2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -28,6 +28,13 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+    // Skip caching for Supabase, Google APIs, and non-GET requests
+    if (event.request.method !== 'GET' || 
+        event.request.url.includes('supabase.co') || 
+        event.request.url.includes('googleapis.com')) {
+        return;
+    }
+
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             // Return cached response if found
