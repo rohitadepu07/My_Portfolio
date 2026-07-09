@@ -22,8 +22,8 @@ jobs:
           npm run build
         env:
           VITE_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # This grabs your hidden secret
-          VITE_SUPABASE_URL: https://ksahjujzfhykhrfjizrri.supabase.co
-          VITE_SUPABASE_ANON_KEY: sb_publishable_R20HYqLuIKVNwJYUxAhb1Q_dymRuWgr
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Upload Artifact 📦
         uses: actions/upload-pages-artifact@v3
